@@ -4,67 +4,44 @@ function getComputerChoice() {
     
     if (ret===1) {
     
-        return "ROCK";
+        return "rock";
     } 
     else if (ret===2) {
     
-        return "PAPER"
+        return "paper"
     }
     
-    return "SCISSORS"
-}
-
-function makeCheckChoice() {
-    let uncheckedChoice;
-    let choice = false;
-
-    while (!choice) {
-        uncheckedChoice = prompt("Choose your warrior: \n");
-        if (typeof(uncheckedChoice) != "string") {
-            console.log("Incorrect entry1, please enter again\n");
-            continue;
-        }
-
-        let upperChoice = uncheckedChoice.toUpperCase();
-
-        if (upperChoice !== "ROCK" && upperChoice !== "PAPER" && upperChoice !== "SCISSORS" ) {
-            console.log("Incorrect entry, please enter again\n")
-            continue;
-        }
-        choice = true;
-    }
-
-    return uncheckedChoice;
+    return "scissors"
 }
 
 function playRound(user, comp) {
     let tie=true;
     while(tie==true) {
-        // Ties
-        if (user==="ROCK" && comp==="ROCK") {
-            alert("TIE!")
-            return "TIE";
+        // ties
+        if (user==="rock" && comp==="rock") {
+            alert("tie!")
+            return "tie";
         }
-        else if (user==="PAPER" && comp==="PAPER") {
-            alert("TIE!")
-            return "TIE";
+        else if (user==="paper" && comp==="paper") {
+            alert("tie!")
+            return "tie";
         }
-        else if (user==="SCISSORS" && comp==="SCISSORS") {
-            alert("TIE!")
-            return "TIE";
+        else if (user==="scissors" && comp==="scissors") {
+            alert("tie!")
+            return "tie";
         }
         // Comp wins
-        else if (user==="ROCK" && comp==="PAPER") {
+        else if (user==="rock" && comp==="paper") {
             tie=false;
             alert("COMPUTER WINS THIS ROUND!")
             return false;
         }
-        else if (user==="PAPER" && comp==="SCISSORS") {
+        else if (user==="paper" && comp==="scissors") {
             tie=false;
             alert("COMPUTER WINS THIS ROUND!")
             return false;
         }
-        else if (user==="SCISSORS" && comp==="ROCK") {
+        else if (user==="scissors" && comp==="rock") {
             tie=false;
             alert("COMPUTER WINS THIS ROUND!")
             return false;        
@@ -84,29 +61,31 @@ function victory(winner, winnerCount, loserCount) {
 let compCount=0;
 let userCount=0;
 
-while(compCount != 5 && userCount != 5) {
+let items = document.querySelectorAll('.option');
+items.forEach((item) => {
+    item.addEventListener('click', () => {
+        console.log(item.classList[0]);
+        console.log(getComputerChoice());
+    })
+})
 
-    let compChoice = getComputerChoice();
-    let playerChoice = makeCheckChoice().toUpperCase();
-    let result = playRound(playerChoice, compChoice)
-    
-    if (result == "TIE") {
-        continue;
-    }
-    else if (result) {
-        userCount++;
-    }
-    else if (!result) {
-        compCount++;
-    }
-    
-    if (userCount === 5) {
-        victory("USER", userCount, compCount);
-        break;
-    }
-    else if (compCount === 5) {
-        victory("COMPUTER", compCount, userCount);
-        break;
-    }
 
-}
+
+// let result = playRound(playerChoice, compChoice)
+
+// if (result == "tie") {
+// }
+// else if (result) {
+//     userCount++;
+// }
+// else if (!result) {
+//     compCount++;
+// }
+
+// if (userCount === 5) {
+//     victory("USER", userCount, compCount);
+// }
+// else if (compCount === 5) {
+//     victory("COMPUTER", compCount, userCount);
+// }
+
